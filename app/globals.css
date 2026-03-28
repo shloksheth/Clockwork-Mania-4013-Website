@@ -1,0 +1,222 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-maroon: #7b1c1c;
+  --color-maroon-dark: #4a0e0e;
+  --color-maroon-light: #a52a2a;
+  --color-black: #0d0d0d;
+  --color-surface: #1a1a1a;
+  --color-surface-raised: #222222;
+  --color-gold: #c9973a;
+  --color-gold-light: #e3b96a;
+  --color-offwhite: #f5f0eb;
+  /* Sophisticated body on dark */
+  --color-text-primary: rgba(245, 240, 235, 0.82);
+  --color-text-muted: #a09890;
+  --color-border: rgba(201, 151, 58, 0.2);
+
+  --noise-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg");
+}
+
+/* Display headings — hero titles */
+.font-display {
+  font-family: var(--font-bebas), sans-serif;
+  letter-spacing: 0.03em;
+  line-height: 0.92;
+}
+
+/* Editorial headings — section titles, pull quotes */
+.font-editorial {
+  font-family: var(--font-playfair), serif;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+/* UI headings — nav, cards, labels */
+.font-ui {
+  font-family: var(--font-space), sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Body copy */
+.font-body {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-[#0D0D0D] font-body text-text-primary antialiased;
+  }
+
+  ::selection {
+    background: rgba(201, 151, 58, 0.35);
+    color: var(--color-offwhite);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Section label with gold rules */
+.section-label-line {
+  @apply h-px w-5 shrink-0 bg-gold opacity-60;
+}
+
+/* Stat number gradient */
+.stat-number-gradient {
+  font-family: var(--font-bebas), sans-serif;
+  font-size: clamp(64px, 8vw, 96px);
+  line-height: 1;
+  color: transparent;
+  background: linear-gradient(
+    135deg,
+    var(--color-maroon-light) 0%,
+    var(--color-gold) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Grain overlay for dark sections */
+.grain-dark {
+  position: relative;
+  isolation: isolate;
+}
+
+.grain-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.025;
+  background-image: var(--noise-svg);
+  background-repeat: repeat;
+  background-size: 280px 280px;
+}
+
+/* Gear rotation — still used where CSS preferred */
+@keyframes spin-cw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-ccw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes scroll-line-sweep {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top center;
+  }
+  40% {
+    transform: scaleY(1);
+    transform-origin: top center;
+  }
+  60% {
+    transform: scaleY(1);
+    transform-origin: bottom center;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom center;
+  }
+}
+
+.animate-scroll-line {
+  animation: scroll-line-sweep 1.5s ease-in-out infinite;
+}
+
+/* Hotspot pulse */
+@keyframes hotspot-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.5;
+  }
+}
+
+.hotspot-pulse {
+  animation: hotspot-pulse 2s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes border-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.tier-diamond-ring {
+  background: linear-gradient(
+    120deg,
+    rgba(201, 151, 58, 0.15),
+    rgba(201, 151, 58, 0.85),
+    rgba(123, 28, 28, 0.6),
+    rgba(201, 151, 58, 0.85),
+    rgba(201, 151, 58, 0.15)
+  );
+  background-size: 300% 300%;
+  animation: border-shimmer 3s ease infinite;
+  padding: 1px;
+  border-radius: 16px;
+}
