@@ -10,9 +10,9 @@ const config: Config = {
     extend: {
       fontFamily: {
         bebas: ["var(--font-bebas)", "sans-serif"],
-        space: ["var(--font-space)", "sans-serif"],
-        inter: ["var(--font-inter)", "sans-serif"],
-        playfair: ["var(--font-playfair)", "serif"],
+        space: ["var(--font-space)", "Syne", "system-ui", "sans-serif"],
+        inter: ["var(--font-cormorant)", "Georgia", "serif"],
+        playfair: ["var(--font-playfair)", "Playfair Display", "serif"],
       },
       colors: {
         maroon: "var(--color-maroon)",

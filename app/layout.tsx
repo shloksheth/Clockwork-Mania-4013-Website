@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import {
   Bebas_Neue,
-  Space_Grotesk,
-  Inter,
+  Syne,
+  Cormorant_Garamond,
   Playfair_Display,
 } from "next/font/google";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
@@ -12,6 +13,7 @@ import { FloatingPillNav } from "@/components/layout/FloatingPillNav";
 import { CustomCursor } from "@/components/layout/CustomCursor";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { ProgressBar } from "@/components/layout/ProgressBar";
+import { SmoothScroll } from "@/components/layout/SmoothScroll";
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
@@ -20,17 +22,17 @@ const bebasNeue = Bebas_Neue({
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const syne = Syne({
   subsets: ["latin"],
   variable: "--font-space",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const inter = Inter({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["300", "400", "500", "600"],
+  variable: "--font-cormorant",
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -63,19 +65,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const fontVars = `${bebasNeue.variable} ${spaceGrotesk.variable} ${inter.variable} ${playfair.variable}`;
+  const fontVars = `${bebasNeue.variable} ${syne.variable} ${cormorant.variable} ${playfair.variable}`;
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body
         className={`${fontVars} min-h-screen bg-[#0D0D0D] font-body text-text-primary antialiased`}
       >
-        <ProgressBar />
-        <CustomCursor />
-        <Nav />
-        <PageTransition>{children}</PageTransition>
-        <FloatingPillNav />
-        <Footer />
+        <SmoothScroll>
+          <ProgressBar />
+          <CustomCursor />
+          <Nav />
+          <PageTransition>{children}</PageTransition>
+          <FloatingPillNav />
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );

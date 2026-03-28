@@ -32,7 +32,7 @@ export default function AwardsPage() {
           <SpotlightCard className="rounded-[12px]">
             <Card goldTop className="flex flex-col items-start gap-4 p-8">
               <Trophy className="h-10 w-10 text-gold" aria-hidden />
-              <p className="font-bebas text-5xl text-offwhite">10</p>
+              <p className="font-bebas text-5xl text-offwhite">5</p>
               <p className="font-space text-sm text-text-muted">
                 World Championship qualifications — sustained excellence across seasons.
               </p>
