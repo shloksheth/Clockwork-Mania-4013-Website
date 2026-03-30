@@ -19,17 +19,16 @@ function HeroPocketWatch() {
   const [mounted, setMounted] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const { isHoveringPocketWatch, setIsHoveringPocketWatch } = usePocketWatchInteraction();
-  const watchRef = useRef<HTMLDivElement>(null);
 
   // Framer Motion values for tilt effect
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!watchRef.current) return;
+    if (!scope.current) return;
 
     const { clientX, clientY } = e;
-    const { left, top, width, height } = watchRef.current.getBoundingClientRect();
+    const { left, top, width, height } = scope.current.getBoundingClientRect();
 
     const centerX = left + width / 2;
     const centerY = top + height / 2;
@@ -52,9 +51,7 @@ function HeroPocketWatch() {
 
   useEffect(() => {
     setMounted(true);
-    if (scope.current) {
-      watchRef.current = scope.current as HTMLDivElement;
-    }
+    // Removed: Manual assignment to watchRef.current is no longer needed.
     const isOpen = isClicked;
     if (reduce || !isOpen) {
       setTime(new Date());

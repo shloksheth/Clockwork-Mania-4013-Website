@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, Suspense } from "react";
+import React, { useRef, useEffect, Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { useGLTF, OrbitControls, Environment } from "@react-three/drei";
 import { Group } from "three";
@@ -8,7 +8,7 @@ import { useSpring, animated } from "@react-spring/three";
 import { usePocketWatchInteraction } from "@/components/context/PocketWatchContext";
 
 
-function Model({ isHovered }: { isHovered: boolean }) {
+function Model({ isHovered, setIsLoading }: { isHovered: boolean, setIsLoading: React.Dispatch<React.SetStateAction<boolean>> }) {
   const { scene, nodes, materials, animations } = useGLTF(
     "/models/pocketwatch/Pocket Watch.gltf"
   );
@@ -16,7 +16,7 @@ function Model({ isHovered }: { isHovered: boolean }) {
 
   useEffect(() => {
     if (nodes && materials && animations) {
-      // 3D model is loaded
+      setIsLoading(false); // Set loading to false once model is loaded
     }
     // You might need to inspect the GLTF structure to find the correct node name for the lid.
     // For now, let's assume there's a node named "Lid" or similar.
@@ -42,6 +42,7 @@ function Model({ isHovered }: { isHovered: boolean }) {
 export function HeroPocketWatch3D() {
   const { isHoveringPocketWatch, setIsHoveringPocketWatch } =
     usePocketWatchInteraction();
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <div
@@ -59,7 +60,7 @@ export function HeroPocketWatch3D() {
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
           <pointLight position={[-10, -10, -10]} />
           <Environment preset="city" />
-          <Model isHovered={isHoveringPocketWatch} />
+          <Model isHovered={isHoveringPocketWatch} setIsLoading={setIsLoading} />
           <OrbitControls enableZoom={false} enablePan={false} />
         </Suspense>
       </Canvas>

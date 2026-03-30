@@ -103,7 +103,7 @@ function StickyProgramSection({
   const reduce = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
-    target: isDesktop ? sectionRef : null, // Conditionally set target to null if not desktop
+    target: isDesktop ? sectionRef : undefined, // Conditionally set target to undefined if not desktop
     offset: ["start start", "end start"],
   });
   const backgroundY = useTransform(
