@@ -101,7 +101,7 @@ function StickyProgramSection({
 }) {
   const isDesktop = useMediaQuery("(min-width: 769px)", false);
   const reduce = useReducedMotion();
-  const sectionRef = useRef(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: isDesktop ? sectionRef : null, // Conditionally set target to null if not desktop
     offset: ["start start", "end start"],
