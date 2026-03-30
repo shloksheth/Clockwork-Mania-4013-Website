@@ -12,6 +12,7 @@ function generateGearPath(
 ): string {
   const pts: string[] = [];
   const angleStep = (2 * Math.PI) / numTeeth;
+  const fixed = 3; // Number of decimal places for consistent rendering
   for (let i = 0; i < numTeeth; i++) {
     const angle = i * angleStep;
     const halfTooth = toothWidth / 2 / outerR;
@@ -19,17 +20,26 @@ function generateGearPath(
     const a2 = angle + halfTooth;
     const a3 = angle + angleStep / 2 - halfTooth * 0.7;
     const a4 = angle + angleStep / 2 + halfTooth * 0.7;
+
+    const x1 = (cx + outerR * Math.cos(a1)).toFixed(fixed);
+    const y1 = (cy + outerR * Math.sin(a1)).toFixed(fixed);
+    const x2 = (cx + outerR * Math.cos(a2)).toFixed(fixed);
+    const y2 = (cy + outerR * Math.sin(a2)).toFixed(fixed);
+    const x3 = (cx + innerR * Math.cos(a3)).toFixed(fixed);
+    const y3 = (cy + innerR * Math.sin(a3)).toFixed(fixed);
+    const x4 = (cx + innerR * Math.cos(a4)).toFixed(fixed);
+    const y4 = (cy + innerR * Math.sin(a4)).toFixed(fixed);
+    const x5 = (cx + outerR * Math.cos((i + 1) * angleStep - halfTooth)).toFixed(fixed);
+    const y5 = (cy + outerR * Math.sin((i + 1) * angleStep - halfTooth)).toFixed(fixed);
+
+
     if (i === 0) {
-      pts.push(
-        `M ${cx + outerR * Math.cos(a1)} ${cy + outerR * Math.sin(a1)}`,
-      );
+      pts.push(`M ${x1} ${y1}`);
     }
-    pts.push(`L ${cx + outerR * Math.cos(a2)} ${cy + outerR * Math.sin(a2)}`);
-    pts.push(`L ${cx + innerR * Math.cos(a3)} ${cy + innerR * Math.sin(a3)}`);
-    pts.push(`L ${cx + innerR * Math.cos(a4)} ${cy + innerR * Math.sin(a4)}`);
-    pts.push(
-      `L ${cx + outerR * Math.cos((i + 1) * angleStep - halfTooth)} ${cy + outerR * Math.sin((i + 1) * angleStep - halfTooth)}`,
-    );
+    pts.push(`L ${x2} ${y2}`);
+    pts.push(`L ${x3} ${y3}`);
+    pts.push(`L ${x4} ${y4}`);
+    pts.push(`L ${x5} ${y5}`);
   }
   pts.push("Z");
   return pts.join(" ");

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const links = [
   { href: "/", label: "Home" },
@@ -72,18 +72,33 @@ function NavLink({
   );
 }
 
-export function Nav() {
+export function Nav({
+  setNavHeight,
+}: { setNavHeight: (height: number) => void }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const reduce = useReducedMotion();
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    const updateNavHeight = () => {
+      if (headerRef.current) {
+        setNavHeight(headerRef.current.offsetHeight);
+      }
+    };
+
+    updateNavHeight();
+    window.addEventListener("resize", updateNavHeight);
+
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", updateNavHeight);
+    };
+  }, [setNavHeight]);
 
   useEffect(() => {
     setOpen(false);
@@ -100,6 +115,7 @@ export function Nav() {
   return (
     <>
       <header
+        ref={headerRef}
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
           scrolled
             ? "border-b border-[var(--color-border)] bg-[rgba(13,13,13,0.92)] backdrop-blur-[16px]"
@@ -113,7 +129,7 @@ export function Nav() {
             aria-label="Clockwork Mania home"
           >
             <GearLogoIcon className="h-9 w-9 text-gold transition-colors group-hover:text-gold-light" />
-            <div className="leading-tight">
+            <div className="leading-tight flex-shrink-0">
               <span className="block font-bebas text-2xl tracking-[0.02em] text-offwhite">
                 CLOCKWORK MANIA
               </span>

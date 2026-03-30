@@ -13,8 +13,8 @@ interface SpotlightCardProps {
 export function SpotlightCard({
   children,
   className = "",
-  spotlightColor = "rgba(201, 151, 58, 0.08)",
-  lift = 6,
+  spotlightColor = "rgba(255, 210, 8, 0.04)",
+  lift = 2,
 }: SpotlightCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -45,11 +45,11 @@ export function SpotlightCard({
         className="pointer-events-none absolute inset-0 z-[1] transition-opacity duration-300"
         style={{
           opacity: isHovered ? 1 : 0,
-          background: `radial-gradient(300px circle at ${mousePosition.x}px ${mousePosition.y}px, ${spotlightColor}, transparent 70%)`,
+          background: `radial-gradient(240px circle at ${mousePosition.x}px ${mousePosition.y}px, ${spotlightColor}, transparent 72%)`,
         }}
       />
       <div
-        className="pointer-events-none absolute inset-0 z-[2] rounded-[inherit] border border-[rgba(201,151,58,0.35)] transition-opacity duration-300"
+        className="pointer-events-none absolute inset-0 z-[2] rounded-[inherit] border border-[rgba(99,11,12,0.2)] transition-opacity duration-300"
         style={{ opacity: isHovered ? 1 : 0 }}
       />
       <div className="relative z-[3] h-full rounded-[inherit]">{children}</div>

@@ -3,8 +3,10 @@
 import { motion, useAnimate, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { GearBackground } from "@/components/sections/GearBackground";
+import { AmbientField } from "@/components/ui/AmbientField";
 import { MagneticButton } from "@/components/ui/MagneticButton";
-import { AnimatedSVGUnderline } from "@/components/ui/AnimatedSVGUnderline";
+import { SectionLabel } from "@/components/ui/SectionLabel";
+import { usePocketWatchInteraction } from "@/components/context/PocketWatchContext";
 
 const CX = 100;
 const CY = 132;
@@ -13,15 +15,18 @@ function HeroPocketWatch() {
   const [scope, animate] = useAnimate();
   const reduce = useReducedMotion();
   const [time, setTime] = useState(() => new Date());
+  const [mounted, setMounted] = useState(false);
+  const { isHoveringPocketWatch, setIsHoveringPocketWatch } = usePocketWatchInteraction();
 
   useEffect(() => {
-    if (reduce) {
+    setMounted(true);
+    if (reduce || !isHoveringPocketWatch) {
       setTime(new Date());
       return;
     }
     const id = window.setInterval(() => setTime(new Date()), 1000);
     return () => window.clearInterval(id);
-  }, [reduce]);
+  }, [reduce, isHoveringPocketWatch]);
 
   useEffect(() => {
     if (reduce) {
@@ -79,6 +84,8 @@ function HeroPocketWatch() {
       className="relative mx-auto w-full max-w-[min(100%,520px)] md:max-w-none"
       style={{ opacity: reduce ? 1 : 0 }}
       aria-hidden
+      onMouseEnter={() => setIsHoveringPocketWatch(true)}
+      onMouseLeave={() => setIsHoveringPocketWatch(false)}
     >
       <svg
         viewBox="0 0 200 250"
@@ -153,7 +160,7 @@ function HeroPocketWatch() {
           fillOpacity={0.35}
           fontSize="11"
           letterSpacing="0.2em"
-          style={{ fontFamily: "var(--font-bebas), sans-serif" }}
+          style={{ fontFamily: "var(--font-heading)" }}
         >
           4013
         </text>
@@ -173,43 +180,47 @@ function HeroPocketWatch() {
         />
 
         {/* Hands — mechanical tick (second jumps each second) */}
-        <g transform={`rotate(${hourDeg} ${CX} ${CY})`}>
-          <line
-            x1={CX}
-            y1={CY}
-            x2={CX}
-            y2={CY - 34}
-            stroke="var(--color-gold)"
-            strokeOpacity={0.75}
-            strokeWidth={3.2}
-            strokeLinecap="round"
-          />
-        </g>
-        <g transform={`rotate(${minuteDeg} ${CX} ${CY})`}>
-          <line
-            x1={CX}
-            y1={CY}
-            x2={CX}
-            y2={CY - 52}
-            stroke="var(--color-offwhite)"
-            strokeOpacity={0.55}
-            strokeWidth={2}
-            strokeLinecap="round"
-          />
-        </g>
-        <g transform={`rotate(${secondDeg} ${CX} ${CY})`}>
-          <line
-            x1={CX}
-            y1={CY + 8}
-            x2={CX}
-            y2={CY - 58}
-            stroke="var(--color-gold-light)"
-            strokeOpacity={0.85}
-            strokeWidth={1}
-            strokeLinecap="round"
-          />
-        </g>
-        <circle cx={CX} cy={CY} r={4} fill="var(--color-maroon-light)" fillOpacity={0.85} stroke="var(--color-gold)" strokeOpacity={0.4} strokeWidth={0.8} />
+        {mounted && isHoveringPocketWatch && (
+          <>
+            <g transform={`rotate(${hourDeg} ${CX} ${CY})`}>
+              <line
+                x1={CX}
+                y1={CY}
+                x2={CX}
+                y2={CY - 34}
+                stroke="var(--color-gold)"
+                strokeOpacity={0.75}
+                strokeWidth={3.2}
+                strokeLinecap="round"
+              />
+            </g>
+            <g transform={`rotate(${minuteDeg} ${CX} ${CY})`}>
+              <line
+                x1={CX}
+                y1={CY}
+                x2={CX}
+                y2={CY - 52}
+                stroke="var(--color-offwhite)"
+                strokeOpacity={0.55}
+                strokeWidth={2}
+                strokeLinecap="round"
+              />
+            </g>
+            <g transform={`rotate(${secondDeg} ${CX} ${CY})`}>
+              <line
+                x1={CX}
+                y1={CY + 8}
+                x2={CX}
+                y2={CY - 58}
+                stroke="var(--color-gold-light)"
+                strokeOpacity={0.85}
+                strokeWidth={1}
+                strokeLinecap="round"
+              />
+            </g>
+            <circle cx={CX} cy={CY} r={4} fill="var(--color-maroon-light)" fillOpacity={0.85} stroke="var(--color-gold)" strokeOpacity={0.4} strokeWidth={0.8} />
+          </>
+        )}
       </svg>
     </motion.div>
   );
@@ -221,21 +232,22 @@ export function HeroSection() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-[#0D0D0D]">
+    <section className="relative min-h-[100svh] overflow-hidden bg-[#080808]">
       <div className="absolute inset-0 z-0">
         <GearBackground />
       </div>
+      <AmbientField variant="hero" className="z-[1]" />
       <div
-        className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_80%_60%_at_70%_50%,rgba(123,28,28,0.18)_0%,rgba(13,13,13,0)_70%)]"
+        className="pointer-events-none absolute inset-0 z-[2] bg-[radial-gradient(ellipse_80%_60%_at_70%_50%,rgba(99,11,12,0.18)_0%,rgba(8,8,8,0)_72%)]"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute inset-0 z-[2] bg-[repeating-linear-gradient(0deg,rgba(255,255,255,0.012)_0px,rgba(255,255,255,0.012)_1px,transparent_1px,transparent_3px)]"
+        className="pointer-events-none absolute inset-0 z-[3] bg-[repeating-linear-gradient(0deg,rgba(255,255,255,0.012)_0px,rgba(255,255,255,0.012)_1px,transparent_1px,transparent_3px)]"
         aria-hidden
       />
 
-      <div className="relative z-[3] mx-auto grid min-h-[100svh] max-w-[1600px] grid-cols-1 items-center gap-10 px-4 py-20 md:grid-cols-[55%_45%] md:gap-8 md:px-8 lg:px-16 lg:py-0">
-        <div className="flex max-w-3xl flex-col justify-center md:py-16">
+      <div className="relative z-[4] mx-auto flex min-h-[100svh] max-w-[1600px] flex-col items-center justify-center gap-10 px-4 py-20 md:px-8 lg:px-16 lg:pb-32 lg:pt-0">
+          <div className="flex max-w-3xl flex-col items-center justify-center py-24 text-center">
           <motion.div
             initial={reduce ? false : { opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -243,130 +255,88 @@ export function HeroSection() {
             className="flex flex-wrap items-center justify-start gap-3"
           >
             <span className="section-label-line" aria-hidden />
-            <AnimatedSVGUnderline
-              textClassName="font-space text-[11px] font-medium uppercase tracking-[0.18em] text-gold"
-              strokeWidth={2.5}
-              gap={2}
-              drawTransition={{ duration: 0.55, ease: [0.65, 0, 0.35, 1] }}
-              className="items-start"
-            >
+            <span className="font-space text-[11px] font-medium uppercase tracking-[0.18em] text-gold">
               Est. 2012 · Orlando, FL
-            </AnimatedSVGUnderline>
+            </span>
             <span className="section-label-line" aria-hidden />
           </motion.div>
 
-          <div
-            className="mt-5 font-display text-[clamp(56px,13vw,140px)] text-offwhite"
+          <div className="mt-5 font-display text-[clamp(56px,13vw,160px)] font-black leading-[1.12] text-offwhite tracking-[0.3em]"
             style={{
-              textShadow: "0 4px 60px rgba(123,28,28,0.35)",
+              textShadow: "0 0 10px rgba(245,240,235,0.4), 0 2px 48px rgba(99,11,12,0.25)",
             }}
           >
-            <div className="overflow-hidden">
-              <motion.span
-                className="block"
-                initial={reduce ? false : { y: "100%" }}
-                animate={{ y: 0 }}
-                transition={{
-                  duration: reduce ? 0 : 0.8,
-                  delay: reduce ? 0 : 0.4,
-                  ease: lineEase,
-                }}
-              >
-                CLOCKWORK
-              </motion.span>
-            </div>
-            <div className="relative overflow-hidden">
-              <motion.span
-                className="block"
-                initial={reduce ? false : { y: "100%" }}
-                animate={{ y: 0 }}
-                transition={{
-                  duration: reduce ? 0 : 0.8,
-                  delay: reduce ? 0 : 0.55,
-                  ease: lineEase,
-                }}
-              >
-                <span className="relative inline-block">
-                  <span
-                    className="block text-transparent"
-                    style={{
-                      WebkitTextStroke: "2px var(--color-maroon-light)",
-                      textShadow: "0 4px 40px rgba(123, 28, 28, 0.4)",
-                    }}
-                    aria-hidden
-                  >
-                    MANIA
-                  </span>
+            <div className="relative">
+              <div className="-my-[0.14em] overflow-hidden py-[0.14em]">
+                <motion.span
+                  className="block"
+                  initial={reduce ? false : { y: "100%" }}
+                  animate={{ y: 0 }}
+                  transition={{
+                    duration: reduce ? 0 : 0.8,
+                    delay: reduce ? 0 : 0.4,
+                    ease: lineEase,
+                  }}
+                >
+                  Clockwork
+                </motion.span>
+              </div>
+              <div className="absolute -bottom-2 right-0 text-[clamp(38px,7vw,80px)] font-['Steamwreck'] uppercase">
+                <div className="relative -my-[0.14em] overflow-hidden py-[0.14em]">
                   <motion.span
-                    className="absolute left-0 top-0 block text-maroon"
-                    initial={{ clipPath: "inset(0 100% 0 0)" }}
-                    animate={{ clipPath: "inset(0 0% 0 0)" }}
+                    className="block"
+                    initial={reduce ? false : { y: "100%" }}
+                    animate={{ y: 0 }}
                     transition={{
-                      duration: reduce ? 0 : 0.9,
-                      delay: reduce ? 0 : 1.2,
-                      ease: "easeOut",
-                    }}
-                    style={{
-                      textShadow: "0 4px 40px rgba(123, 28, 28, 0.4)",
+                      duration: reduce ? 0 : 0.8,
+                      delay: reduce ? 0 : 0.55,
+                      ease: lineEase,
                     }}
                   >
-                    MANIA
+                    <span className="relative inline-block pb-[0.08em]">
+                      <span
+                        className="block text-transparent"
+                        style={{
+                          WebkitTextStroke: "2px var(--color-maroon-light)",
+                          textShadow: "0 4px 40px rgba(99,11,12,0.35)",
+                        }}
+                        aria-hidden
+                      >
+                        MANIA
+                      </span>
+                      <motion.span
+                        className="absolute left-0 top-0 block pb-[0.08em] text-maroon"
+                        initial={{ clipPath: "inset(0 100% 0 0)" }}
+                        animate={{ clipPath: "inset(0 0% 0 0)" }}
+                        transition={{
+                          duration: reduce ? 0 : 0.9,
+                          delay: reduce ? 0 : 1.2,
+                          ease: "easeOut",
+                        }}
+                        style={{
+                          textShadow: "0 4px 40px rgba(99,11,12,0.35)",
+                        }}
+                      >
+                        MANIA
+                      </motion.span>
+                    </span>
                   </motion.span>
-                </span>
-              </motion.span>
+                </div>
+              </div>
             </div>
           </div>
 
-          <motion.div
-            initial={reduce ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: reduce ? 0 : 0.6, delay: reduce ? 0 : 0.9 }}
-            className="mt-4 font-space text-[14px] font-medium uppercase tracking-[0.25em] text-gold"
-          >
-            FRC TEAM 4013
-          </motion.div>
 
-          <motion.div
-            initial={reduce ? false : { opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: reduce ? 0 : 0.6, delay: reduce ? 0 : 1.1 }}
-            className="mt-6 max-w-[380px] border-l-[3px] border-gold pl-4 font-editorial text-[18px] italic leading-relaxed text-[rgba(245,240,235,0.65)]"
-          >
-            Even the smallest gear makes the clock work.
-          </motion.div>
 
-          <motion.div
-            className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap"
-            initial={reduce ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: reduce ? 0 : 0.5, delay: reduce ? 0 : 1.25 }}
-          >
-            <motion.div
-              initial={reduce ? false : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: reduce ? 0 : 1.3, duration: 0.45 }}
-            >
-              <MagneticButton href="/about">Our Story</MagneticButton>
-            </motion.div>
-            <motion.div
-              initial={reduce ? false : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: reduce ? 0 : 1.45, duration: 0.45 }}
-            >
-              <MagneticButton href="/robot" variant="ghost">
-                View Robot
-              </MagneticButton>
-            </motion.div>
-          </motion.div>
+
         </div>
-
-        <div className="hidden justify-center md:flex md:justify-end md:pr-4 lg:pr-8">
+            <div className="flex items-center justify-center pt-10 md:pt-0">
           <HeroPocketWatch />
         </div>
       </div>
 
       <div
-        className="pointer-events-none absolute bottom-8 left-1/2 z-[3] flex -translate-x-1/2 flex-col items-center gap-2"
+        className="pointer-events-none absolute bottom-8 left-1/2 z-[5] flex -translate-x-1/2 flex-col items-center gap-2"
         aria-hidden
       >
         <span className="font-space text-[10px] uppercase tracking-[0.2em] text-gold">

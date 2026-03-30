@@ -59,7 +59,7 @@ export default function SponsorsPage() {
         className="scroll-mt-28 bg-offwhite py-16 md:py-24 lg:py-32"
       >
         <div className="mx-auto max-w-4xl px-4 md:px-8 lg:px-16">
-          <h2 className="font-ui text-[clamp(36px,6vw,48px)] font-bold text-[#0d0d0d]">
+          <h2 className="font-heading text-[clamp(36px,6vw,48px)] font-semibold text-[#1a1816]">
             Partnership Levels
           </h2>
           <div className="mt-12 flex flex-col gap-6">
@@ -69,9 +69,9 @@ export default function SponsorsPage() {
               return (
                 <RevealOnScroll key={tier.id} delay={i * 0.1} direction="up">
                   <div
-                    className={`relative flex flex-col gap-6 rounded-2xl border bg-white p-6 shadow-sm lg:flex-row lg:items-stretch lg:gap-8 lg:p-8 ${
+                    className={`relative flex flex-col gap-6 rounded-card border bg-white p-6 shadow-sm lg:flex-row lg:items-stretch lg:gap-8 lg:p-8 ${
                       isDiamond
-                        ? "border-2 border-gold bg-[linear-gradient(135deg,#fff_0%,rgba(201,151,58,0.04)_100%)] shadow-[0_0_0_1px_rgba(201,151,58,0.2)]"
+                        ? "border border-gold/50 bg-white shadow-[inset_0_1px_0_rgba(255,210,8,0.12)]"
                         : "border border-[rgba(13,13,13,0.08)]"
                     }`}
                   >

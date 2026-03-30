@@ -67,7 +67,7 @@ export default function AboutPage() {
             </p>
           </RevealOnScroll>
           <RevealOnScroll delay={0.05} direction="right">
-            <ImageReveal direction="right" delay={0.05} className="aspect-[4/5] rounded-2xl">
+            <ImageReveal direction="right" delay={0.05} className="aspect-[4/5] rounded-card">
               <div className="flex min-h-[280px] items-center justify-center bg-gradient-to-br from-maroon-dark to-black p-6 text-center font-space text-xs uppercase tracking-[0.12em] text-text-muted md:min-h-full">
                 {/* TODO: Replace with official team photo */}
                 {"// IMAGE: Team photo"}
@@ -99,7 +99,7 @@ export default function AboutPage() {
 
       <section className="grain-dark bg-[#0D0D0D] py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <h2 className="font-space text-4xl font-bold text-offwhite">What We Teach</h2>
+          <h2 className="font-heading text-4xl font-semibold text-offwhite">What We Teach</h2>
           <div className="mt-12 grid gap-12 lg:grid-cols-2">
             <div>
               <h3 className="font-space text-sm font-semibold uppercase tracking-[0.12em] text-gold">
@@ -109,7 +109,7 @@ export default function AboutPage() {
                 {technicalTags.map((t) => (
                   <span
                     key={t}
-                    className="rounded-full border border-maroon-light bg-[rgba(123,28,28,0.3)] px-3 py-1.5 font-space text-sm text-offwhite"
+                    className="rounded-full border border-maroon-light bg-[rgba(99,11,12,0.3)] px-3 py-1.5 font-space text-sm text-offwhite"
                   >
                     {t}
                   </span>
@@ -124,7 +124,7 @@ export default function AboutPage() {
                 {lifeTags.map((t) => (
                   <span
                     key={t}
-                    className="rounded-full border border-maroon-light bg-[rgba(123,28,28,0.3)] px-3 py-1.5 font-space text-sm text-offwhite"
+                    className="rounded-full border border-maroon-light bg-[rgba(99,11,12,0.3)] px-3 py-1.5 font-space text-sm text-offwhite"
                   >
                     {t}
                   </span>
@@ -141,10 +141,10 @@ export default function AboutPage() {
       <section id="subteams" className="scroll-mt-28 bg-[#0d0d0d] py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <SectionLabel>People</SectionLabel>
-          <h2 className="mt-3 font-space text-4xl font-bold text-offwhite">Our Subteams</h2>
+          <h2 className="mt-3 font-heading text-4xl font-semibold text-offwhite">Our Subteams</h2>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {subteams.map((s) => (
-              <SpotlightCard key={s.name} className="rounded-[12px]">
+              <SpotlightCard key={s.name} className="rounded-card">
                 <Card goldTop className="h-full p-6">
                   <SubteamIcon icon={s.icon} />
                   <h3 className="mt-4 font-space text-lg font-semibold text-offwhite">{s.name}</h3>
@@ -161,7 +161,7 @@ export default function AboutPage() {
 
       <section className="bg-offwhite py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <h2 className="font-space text-4xl font-bold text-[#0d0d0d]">Team Structure</h2>
+          <h2 className="font-heading text-4xl font-semibold text-[#1a1816]">Team Structure</h2>
           <p className="mt-6 max-w-3xl font-inter text-[17px] leading-[1.75] text-[#3d3835]">
             Clockwork Mania organizes into two primary divisions — the Robot Division and the
             Logistics Division — each owning a distinct slice of season execution. Subteams plug

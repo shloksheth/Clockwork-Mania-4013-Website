@@ -9,10 +9,29 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        bebas: ["var(--font-bebas)", "sans-serif"],
-        space: ["var(--font-space)", "Syne", "system-ui", "sans-serif"],
-        inter: ["var(--font-cormorant)", "Georgia", "serif"],
-        playfair: ["var(--font-playfair)", "Playfair Display", "serif"],
+        heading: ["var(--font-heading)", "Georgia", "serif"],
+        bebas: ["var(--font-heading)", "Georgia", "serif"],
+        space: [
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "Segoe UI",
+          "sans-serif",
+        ],
+        inter: [
+          "var(--font-baskerville)",
+          "Libre Baskerville",
+          "Baskerville",
+          "Georgia",
+          "serif",
+        ],
+        playfair: [
+          "var(--font-baskerville)",
+          "Libre Baskerville",
+          "Baskerville",
+          "Georgia",
+          "serif",
+        ],
       },
       colors: {
         maroon: "var(--color-maroon)",
@@ -27,12 +46,24 @@ const config: Config = {
         "text-muted": "var(--color-text-muted)",
         border: "var(--color-border)",
       },
+      borderRadius: {
+        card: "3px",
+      },
       backgroundImage: {
         "subtle-dark":
           "linear-gradient(180deg, var(--color-surface) 0%, var(--color-black) 100%)",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function headingMetricsPlugin({ addUtilities }: { addUtilities: (u: Record<string, Record<string, string>>) => void }) {
+      addUtilities({
+        ".font-heading": {
+          lineHeight: "1.2",
+          letterSpacing: "0.02em",
+        },
+      });
+    },
+  ],
 };
 export default config;

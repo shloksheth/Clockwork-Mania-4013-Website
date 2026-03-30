@@ -29,7 +29,7 @@ export function ProgressBar() {
         transition={{ delay: 0.7, duration: 0.3, ease: "easeOut" }}
       >
         <motion.div
-          className="h-full w-full bg-gradient-to-r from-maroon to-gold"
+          className="h-full w-full bg-gold"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}

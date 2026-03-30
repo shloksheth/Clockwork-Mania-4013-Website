@@ -4,7 +4,7 @@ import type { SponsorEntry } from "@/data/sponsors";
 export function SponsorCard({ sponsor }: { sponsor: SponsorEntry }) {
   return (
     <SpotlightCard
-      className="rounded-xl border border-[rgba(201,151,58,0.1)] bg-[var(--color-surface)]"
+      className="rounded-card border border-[rgba(255,210,8,0.1)] bg-[var(--color-surface)]"
       spotlightColor="rgba(201, 151, 58, 0.08)"
       lift={6}
     >

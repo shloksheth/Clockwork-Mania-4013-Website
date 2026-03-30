@@ -48,7 +48,7 @@ export function ContactForm() {
             key="t"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            className="rounded-2xl border border-[rgba(13,13,13,0.08)] bg-white p-12 text-center shadow-sm"
+            className="rounded-card border border-[rgba(13,13,13,0.08)] bg-white p-12 text-center shadow-sm"
           >
             <p className="font-bebas text-5xl text-maroon">THANK YOU</p>
             <p className="mt-4 font-inter text-[#3d3835]">
@@ -72,14 +72,14 @@ export function ContactForm() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-5 rounded-2xl border border-[rgba(13,13,13,0.08)] bg-white p-8 shadow-sm"
+            className="space-y-5 rounded-card border border-[rgba(13,13,13,0.08)] bg-white p-8 shadow-sm"
           >
             <div>
               <label className="font-space text-xs uppercase tracking-[0.1em] text-[#5c534c]">
                 Name *
               </label>
               <input
-                className="mt-2 w-full rounded-xl border border-[#d8d0c8] bg-[#faf8f6] px-4 py-3 font-inter text-[#0d0d0d] outline-none focus:border-maroon"
+                className="mt-2 w-full rounded-card border border-[#d8d0c8] bg-[#faf8f6] px-4 py-3 font-inter text-[#0d0d0d] outline-none focus:border-maroon"
                 {...register("name", { required: "Required" })}
               />
               {errors.name && (
@@ -92,7 +92,7 @@ export function ContactForm() {
               </label>
               <input
                 type="email"
-                className="mt-2 w-full rounded-xl border border-[#d8d0c8] bg-[#faf8f6] px-4 py-3 font-inter text-[#0d0d0d] outline-none focus:border-maroon"
+                className="mt-2 w-full rounded-card border border-[#d8d0c8] bg-[#faf8f6] px-4 py-3 font-inter text-[#0d0d0d] outline-none focus:border-maroon"
                 {...register("email", {
                   required: "Required",
                   pattern: {
@@ -110,7 +110,7 @@ export function ContactForm() {
                 Subject
               </label>
               <select
-                className="mt-2 w-full rounded-xl border border-[#d8d0c8] bg-[#faf8f6] px-4 py-3 font-inter text-[#0d0d0d] outline-none focus:border-maroon"
+                className="mt-2 w-full rounded-card border border-[#d8d0c8] bg-[#faf8f6] px-4 py-3 font-inter text-[#0d0d0d] outline-none focus:border-maroon"
                 {...register("subject")}
               >
                 {subjects.map((s) => (
@@ -126,7 +126,7 @@ export function ContactForm() {
               </label>
               <textarea
                 rows={5}
-                className="mt-2 w-full rounded-xl border border-[#d8d0c8] bg-[#faf8f6] px-4 py-3 font-inter text-[#0d0d0d] outline-none focus:border-maroon"
+                className="mt-2 w-full rounded-card border border-[#d8d0c8] bg-[#faf8f6] px-4 py-3 font-inter text-[#0d0d0d] outline-none focus:border-maroon"
                 {...register("message", { required: "Required" })}
               />
               {errors.message && (

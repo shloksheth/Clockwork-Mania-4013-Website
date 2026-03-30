@@ -103,7 +103,7 @@ function StickyProgramSection({
   const reduce = useReducedMotion();
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
+    target: isDesktop ? sectionRef : null, // Conditionally set target to null if not desktop
     offset: ["start start", "end start"],
   });
   const backgroundY = useTransform(
@@ -129,7 +129,7 @@ function StickyProgramSection({
           <p className="mt-4 max-w-2xl font-body text-[clamp(15px,2vw,18px)] text-text-primary">
             {description}
           </p>
-          <div className="relative mt-10 min-h-[200px] overflow-hidden rounded-2xl border border-[rgba(201,151,58,0.12)]">
+          <div className="relative mt-10 min-h-[200px] overflow-hidden rounded-card border border-[rgba(255,210,8,0.12)]">
             {visual}
           </div>
           <div className="mt-8">{children}</div>
@@ -189,12 +189,12 @@ export function OutreachParallaxBlocks() {
           {internationalCountryCards.map((c, i) => (
             <SpotlightCard
               key={c.name}
-              className="rounded-xl border border-[rgba(201,151,58,0.12)] bg-surface p-6"
+              className="rounded-card border border-[rgba(255,210,8,0.12)] bg-surface p-6"
               spotlightColor="rgba(201, 151, 58, 0.08)"
               lift={6}
             >
               <span className="text-2xl">{c.flag}</span>
-              <h3 className="mt-3 font-ui text-lg text-offwhite">{c.name}</h3>
+              <h3 className="mt-3 font-heading text-lg font-medium text-offwhite">{c.name}</h3>
               <p className="mt-2 font-body text-sm text-text-muted">{c.description}</p>
             </SpotlightCard>
           ))}
@@ -212,7 +212,7 @@ export function OutreachParallaxBlocks() {
           {communityOutreachEvents.map((e) => (
             <SpotlightCard
               key={e.title}
-              className="rounded-xl"
+              className="rounded-card"
               spotlightColor="rgba(123, 28, 28, 0.06)"
               lift={6}
             >
@@ -229,7 +229,7 @@ export function OutreachParallaxBlocks() {
         description={collaborationsIntro}
         visual={
           <div
-            className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_40%,rgba(123,28,28,0.2)_0%,transparent_65%)]"
+            className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_40%,rgba(99,11,12,0.2)_0%,transparent_65%)]"
             aria-hidden
           />
         }
@@ -238,11 +238,11 @@ export function OutreachParallaxBlocks() {
           {collaborations.map((c) => (
             <SpotlightCard
               key={c.title}
-              className="min-w-0 flex-1 rounded-xl border border-[rgba(201,151,58,0.12)] bg-surface p-6 md:min-w-[280px]"
+              className="min-w-0 flex-1 rounded-card border border-[rgba(255,210,8,0.12)] bg-surface p-6 md:min-w-[280px]"
               spotlightColor="rgba(201, 151, 58, 0.08)"
               lift={6}
             >
-              <h3 className="font-ui text-lg text-offwhite">{c.title}</h3>
+              <h3 className="font-heading text-lg font-medium text-offwhite">{c.title}</h3>
               <p className="mt-3 font-body text-sm text-text-muted">{c.description}</p>
             </SpotlightCard>
           ))}

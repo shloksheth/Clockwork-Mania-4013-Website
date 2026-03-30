@@ -7,7 +7,7 @@ export type Achievement = {
 
 export const achievements: Achievement[] = [
   {
-    title: "10 / 13 World Championship qualifications",
+    title: "5 / 13 World Championship qualifications",
     year: "2012–2025",
     description:
       "Sustained excellence across more than a decade of FRC competition.",
@@ -80,7 +80,7 @@ export const achievements: Achievement[] = [
   {
     title: "FTC 27188 — Fractal Fusion",
     description: "Team award and state advancement in rookie year.",
-    icon: "sparkles",
+    icon: "medal",
   },
   {
     title: "Accenture donation & internship connections",

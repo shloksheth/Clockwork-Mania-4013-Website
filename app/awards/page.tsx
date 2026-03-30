@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 const achievementCardClass =
-  "mb-6 break-inside-avoid rounded-[12px] border border-[rgba(13,13,13,0.08)] border-t-2 border-t-[rgba(201,151,58,0.2)] bg-white p-6 shadow-sm transition-[border-color,box-shadow] duration-200 ease-out hover:border-t-[rgba(201,151,58,0.9)] hover:shadow-[0_-2px_12px_rgba(201,151,58,0.15)]";
+  "mb-6 break-inside-avoid rounded-card border border-[rgba(8,8,8,0.08)] bg-white p-6 shadow-[0_1px_0_rgba(8,8,8,0.04)] transition-[border-color] duration-200 ease-out hover:border-maroon/20";
 
 export default function AwardsPage() {
   return (
@@ -29,7 +29,7 @@ export default function AwardsPage() {
 
       <section id="highlights" className="scroll-mt-28 bg-[#0d0d0d] py-16 lg:py-20">
         <div className="mx-auto grid max-w-7xl gap-8 px-5 sm:grid-cols-2 lg:grid-cols-3 lg:px-8">
-          <SpotlightCard className="rounded-[12px]">
+          <SpotlightCard className="rounded-card">
             <Card goldTop className="flex flex-col items-start gap-4 p-8">
               <Trophy className="h-10 w-10 text-gold" aria-hidden />
               <p className="font-bebas text-5xl text-offwhite">5</p>
@@ -38,7 +38,7 @@ export default function AwardsPage() {
               </p>
             </Card>
           </SpotlightCard>
-          <SpotlightCard className="rounded-[12px]">
+          <SpotlightCard className="rounded-card">
             <Card goldTop className="flex flex-col items-start gap-4 p-8">
               <Star className="h-10 w-10 text-gold" aria-hidden />
               <p className="font-bebas text-5xl text-offwhite">12+</p>
@@ -47,7 +47,7 @@ export default function AwardsPage() {
               </p>
             </Card>
           </SpotlightCard>
-          <SpotlightCard className="rounded-[12px] sm:col-span-2 lg:col-span-1">
+          <SpotlightCard className="rounded-card sm:col-span-2 lg:col-span-1">
             <Card goldTop className="flex flex-col items-start gap-4 p-8">
               <GraduationCap className="h-10 w-10 text-gold" aria-hidden />
               <p className="font-bebas text-5xl text-offwhite">100%</p>
@@ -61,12 +61,12 @@ export default function AwardsPage() {
 
       <section id="timeline" className="scroll-mt-28 bg-offwhite py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <h2 className="font-space text-4xl font-bold text-[#0d0d0d]">Achievements</h2>
+          <h2 className="font-heading text-4xl font-semibold text-[#1a1816]">Achievements</h2>
           <div className="mt-12 columns-1 gap-6 md:columns-2 lg:columns-3">
             {achievements.map((a) => (
               <SpotlightCard
                 key={a.title}
-                className="rounded-[12px]"
+                className="rounded-card"
                 spotlightColor="rgba(123, 28, 28, 0.06)"
               >
                 <div className={achievementCardClass}>
@@ -88,10 +88,10 @@ export default function AwardsPage() {
 
       <section id="press" className="grain-dark scroll-mt-28 bg-[#0D0D0D] py-20 lg:py-28">
         <div className="relative z-10 mx-auto max-w-7xl px-5 lg:px-8">
-          <h2 className="font-space text-4xl font-bold text-offwhite">In the Press</h2>
+          <h2 className="font-heading text-4xl font-semibold text-offwhite">In the Press</h2>
           <div className="mt-12 grid gap-8 md:grid-cols-2">
             {pressItems.map((p) => (
-              <SpotlightCard key={p.headline} className="rounded-[12px]">
+              <SpotlightCard key={p.headline} className="rounded-card">
                 <Card className="p-8">
                   <p className="font-space text-xs font-semibold uppercase tracking-[0.12em] text-gold">
                     {p.outlet}

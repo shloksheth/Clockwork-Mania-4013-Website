@@ -42,9 +42,9 @@ export default function OutreachPage() {
 
       <section id="programs" className="scroll-mt-28 bg-[#0d0d0d] py-16 md:py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-16">
-          <div className="rounded-2xl border border-[rgba(201,151,58,0.2)] bg-surface p-8 md:p-14">
+          <div className="rounded-card border border-[rgba(255,210,8,0.2)] bg-surface p-8 md:p-14">
             <h2 className="font-display text-[clamp(40px,6vw,64px)] text-gold">Synaptic Solutions</h2>
-            <p className="mt-6 font-ui text-sm uppercase tracking-[0.12em] text-offwhite">
+            <p className="mt-6 font-space text-sm uppercase tracking-[0.12em] text-offwhite">
               Innovation for neurodiversity
             </p>
             <p className="mt-6 font-body text-[clamp(15px,2vw,18px)] text-text-primary">
@@ -53,7 +53,7 @@ export default function OutreachPage() {
           </div>
 
           <div className="mt-20">
-            <h3 className="font-ui text-[clamp(24px,4vw,32px)] text-offwhite">
+            <h3 className="font-heading text-[clamp(24px,4vw,32px)] font-medium text-offwhite">
               Teams We&apos;ve Built
             </h3>
             <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -91,7 +91,7 @@ export default function OutreachPage() {
               ].map((t) => (
                 <SpotlightCard
                   key={t.title}
-                  className="rounded-xl"
+                  className="rounded-card"
                   spotlightColor="rgba(123, 28, 28, 0.06)"
                   lift={6}
                 >
@@ -101,7 +101,7 @@ export default function OutreachPage() {
             </div>
           </div>
 
-          <div className="mt-20 rounded-2xl border border-[rgba(201,151,58,0.15)] bg-surface p-10">
+          <div className="mt-20 rounded-card border border-[rgba(255,210,8,0.15)] bg-surface p-10">
             <h3 className="font-display text-[clamp(36px,5vw,52px)] text-offwhite">
               Autodesk Certification
             </h3>

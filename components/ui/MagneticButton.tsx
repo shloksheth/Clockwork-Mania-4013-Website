@@ -7,13 +7,13 @@ import { motion, useReducedMotion } from "framer-motion";
 type Variant = "primary" | "ghost";
 
 const baseInner =
-  "relative z-[1] inline-flex items-center justify-center overflow-hidden rounded-[4px] border px-8 py-3.5 font-space text-[13px] font-semibold uppercase tracking-[0.1em] transition-colors";
+  "relative z-[1] inline-flex items-center justify-center overflow-hidden rounded-card border px-8 py-3.5 font-space text-[11px] font-medium uppercase tracking-[0.12em] transition-colors";
 
 const variantClass: Record<Variant, string> = {
   primary:
-    "border-transparent bg-maroon text-gold hover:text-gold-light [.light-cta_&]:border-[rgba(13,13,13,0.25)] [.light-cta_&]:bg-[#f5f0eb] [.light-cta_&]:text-maroon [.light-cta_&]:hover:bg-white",
+    "border-transparent bg-maroon text-gold hover:text-gold-light [.light-cta_&]:border-[rgba(8,8,8,0.12)] [.light-cta_&]:bg-[#f7f5f0] [.light-cta_&]:text-maroon [.light-cta_&]:hover:bg-white",
   ghost:
-    "border border-[rgba(201,151,58,0.5)] bg-transparent text-gold hover:border-[rgba(201,151,58,0.9)] hover:bg-[rgba(201,151,58,0.08)] [.light-cta_&]:border-[rgba(13,13,13,0.4)] [.light-cta_&]:text-[#0d0d0d] [.light-cta_&]:hover:bg-[rgba(13,13,13,0.06)]",
+    "border border-gold/35 bg-transparent text-gold hover:border-gold/70 hover:bg-[rgba(255,210,8,0.06)] [.light-cta_&]:border-[rgba(8,8,8,0.2)] [.light-cta_&]:text-[#1a1816] [.light-cta_&]:hover:bg-[rgba(8,8,8,0.04)]",
 };
 
 const outerVariants = { rest: {}, hover: {} };
@@ -28,7 +28,7 @@ function ShimmerLayer({
   const gradient =
     variant === "primary"
       ? "linear-gradient(105deg, transparent 25%, rgba(255,255,255,0.4) 50%, transparent 75%)"
-      : "linear-gradient(105deg, transparent 25%, rgba(201,151,58,0.45) 50%, transparent 75%)";
+      : "linear-gradient(105deg, transparent 25%, rgba(255,210,8,0.35) 50%, transparent 75%)";
 
   return (
     <motion.span

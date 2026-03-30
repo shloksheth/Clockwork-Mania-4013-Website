@@ -38,7 +38,7 @@ export default function BlogPostPage({ params }: Props) {
 
       {/* TODO: Replace with actual hero image */}
       <div className="relative mx-auto max-w-[900px] px-5">
-        <div className="relative -mt-10 aspect-[21/9] overflow-hidden rounded-2xl border border-[var(--color-border)] bg-gradient-to-br from-maroon-dark to-black shadow-xl">
+        <div className="relative -mt-10 aspect-[21/9] overflow-hidden rounded-card border border-[var(--color-border)] bg-gradient-to-br from-maroon-dark to-black shadow-xl">
           <span className="absolute inset-0 flex items-center justify-center p-6 text-center font-space text-xs uppercase tracking-[0.12em] text-text-muted">
             {/* TODO: Article hero */}
             {"// IMAGE: Article hero"}

@@ -20,7 +20,7 @@ const tierOptions = sponsorTiers.map((t) => ({
 }));
 
 const fieldClass =
-  "w-full rounded-md border border-[rgba(201,151,58,0.2)] bg-[rgba(255,255,255,0.04)] px-[18px] py-3.5 font-inter text-[15px] text-offwhite placeholder:text-text-muted outline-none transition-[border,box-shadow,background] focus:border-[rgba(201,151,58,0.7)] focus:bg-[rgba(255,255,255,0.06)] focus:shadow-[0_0_0_3px_rgba(201,151,58,0.08)]";
+  "w-full rounded-card border border-border bg-[rgba(255,255,255,0.04)] px-[18px] py-3.5 font-inter text-[15px] text-offwhite placeholder:text-text-muted outline-none transition-[border,background] focus:border-gold/35 focus:bg-[rgba(255,255,255,0.06)]";
 
 const labelClass =
   "mb-2 block font-space text-xs uppercase tracking-[0.1em] text-gold";

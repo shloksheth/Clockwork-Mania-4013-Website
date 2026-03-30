@@ -38,7 +38,7 @@ export default function ContactPage() {
             ].map((c) => (
               <div
                 key={c.title}
-                className="rounded-2xl border border-[rgba(13,13,13,0.08)] bg-white p-6 shadow-sm"
+                className="rounded-card border border-[rgba(13,13,13,0.08)] bg-white p-6 shadow-sm"
               >
                 <p className="font-space text-xs font-semibold uppercase tracking-[0.1em] text-maroon">
                   {c.title}
@@ -59,21 +59,21 @@ export default function ContactPage() {
               <a
                 href="https://instagram.com"
                 aria-label="Instagram"
-                className="rounded-xl border border-[rgba(13,13,13,0.12)] p-3 text-[#0d0d0d] hover:border-maroon"
+                className="rounded-card border border-[rgba(13,13,13,0.12)] p-3 text-[#0d0d0d] hover:border-maroon"
               >
                 <Instagram className="h-5 w-5" />
               </a>
               <a
                 href="https://facebook.com"
                 aria-label="Facebook"
-                className="rounded-xl border border-[rgba(13,13,13,0.12)] p-3 text-[#0d0d0d] hover:border-maroon"
+                className="rounded-card border border-[rgba(13,13,13,0.12)] p-3 text-[#0d0d0d] hover:border-maroon"
               >
                 <Facebook className="h-5 w-5" />
               </a>
               <a
                 href="https://youtube.com"
                 aria-label="YouTube"
-                className="rounded-xl border border-[rgba(13,13,13,0.12)] p-3 text-[#0d0d0d] hover:border-maroon"
+                className="rounded-card border border-[rgba(13,13,13,0.12)] p-3 text-[#0d0d0d] hover:border-maroon"
               >
                 <Youtube className="h-5 w-5" />
               </a>

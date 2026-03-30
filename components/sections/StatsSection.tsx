@@ -25,7 +25,7 @@ export function StatsSection() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: i * 0.08, duration: 0.55, ease: "easeOut" }}
           >
-            <SpotlightCard className="rounded-[12px]" spotlightColor="rgba(201, 151, 58, 0.08)" lift={4}>
+            <SpotlightCard className="rounded-card" spotlightColor="rgba(201, 151, 58, 0.08)" lift={4}>
               <Card goldTop className="h-full border-0 p-6 text-center shadow-none md:p-8">
                 <div className="stat-number-gradient flex justify-center">
                   {inView ? (

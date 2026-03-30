@@ -9,7 +9,7 @@ export function BlogCard({ post, index = 0 }: { post: BlogPost; index?: number }
     <Link
       href={`/blog/${post.slug}`}
       data-cursor-hover
-      className="group flex flex-col overflow-hidden rounded-2xl border border-[rgba(13,13,13,0.08)] bg-white shadow-sm transition-colors duration-300 hover:border-gold md:flex-row"
+      className="group flex flex-col overflow-hidden rounded-card border border-[rgba(13,13,13,0.08)] bg-white shadow-sm transition-colors duration-300 hover:border-gold md:flex-row"
     >
       <ImageReveal
         direction={index % 2 === 0 ? "up" : "left"}
@@ -27,7 +27,7 @@ export function BlogCard({ post, index = 0 }: { post: BlogPost; index?: number }
         <span className="font-space text-[11px] font-semibold uppercase tracking-[0.1em] text-maroon">
           {post.category}
         </span>
-        <h3 className="mt-2 font-ui text-xl text-[#0d0d0d] transition-colors group-hover:text-maroon">
+        <h3 className="mt-2 font-heading text-xl font-medium text-[#1a1816] transition-colors group-hover:text-maroon">
           {post.title}
         </h3>
         <time dateTime={post.date} className="mt-2 font-space text-xs text-[#5c534c]">

@@ -15,6 +15,7 @@ import { robotTeaserCopy } from "@/data/impact";
 import { Cog, Globe2, GraduationCap } from "lucide-react";
 import Link from "next/link";
 import { OutreachTripleCards } from "@/components/sections/OutreachTripleCards";
+import { AmbientField } from "@/components/ui/AmbientField";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -57,7 +58,7 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-4 md:grid-cols-2 md:px-8 lg:gap-16 lg:px-16">
           <RevealOnScroll direction="left">
             <div>
-              <h2 className="relative inline-block font-ui text-[clamp(36px,6vw,48px)] font-bold text-[#0d0d0d]">
+              <h2 className="relative inline-block font-heading text-[clamp(36px,6vw,48px)] font-semibold text-[#0d0d0d]">
                 Who We Are
                 <span className="absolute -bottom-2 left-0 h-1 w-[60px] bg-maroon" />
               </h2>
@@ -91,14 +92,14 @@ export default function HomePage() {
             ].map((p) => (
               <SpotlightCard
                 key={p.title}
-                className="rounded-xl border border-[rgba(13,13,13,0.08)] bg-white shadow-sm"
-                spotlightColor="rgba(123, 28, 28, 0.06)"
+                className="rounded-card border border-[rgba(13,13,13,0.08)] bg-white shadow-sm"
+                spotlightColor="rgba(99, 11, 12, 0.08)"
                 lift={4}
               >
                 <div className="flex gap-4 p-5">
                   <p.icon className="mt-1 h-6 w-6 shrink-0 text-maroon" aria-hidden />
                   <div>
-                    <h3 className="font-ui text-lg text-[#0d0d0d]">{p.title}</h3>
+                    <h3 className="font-heading text-lg font-medium text-[#1a1816]">{p.title}</h3>
                     <p className="mt-1 font-body text-sm text-[#3d3835]">{p.body}</p>
                   </div>
                 </div>
@@ -112,9 +113,12 @@ export default function HomePage() {
 
       <section
         id="outreach"
-        className="grain-dark scroll-mt-28 bg-[#0D0D0D] py-16 md:py-24 lg:py-32"
+        className="relative grain-dark scroll-mt-28 bg-[#0D0D0D] py-16 md:py-24 lg:py-32"
       >
-        <GearBackground />
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <GearBackground />
+        </div>
+        <AmbientField variant="subtle" className="z-[1]" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8 lg:px-16">
           <SectionLabel>Outreach &amp; Impact</SectionLabel>
           <h2 className="mt-4 max-w-4xl font-display text-[clamp(46px,8vw,88px)] text-offwhite">
@@ -142,7 +146,7 @@ export default function HomePage() {
           </div>
           <div className="flex items-center justify-center bg-offwhite p-8 md:p-16 lg:p-16">
             <ImageReveal direction="right" className="w-full max-w-lg">
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-[rgba(13,13,13,0.08)] bg-gradient-to-br from-maroon/30 via-[#1a0a0a] to-black shadow-inner">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-card border border-[rgba(13,13,13,0.08)] bg-gradient-to-br from-maroon/30 via-[#1a0a0a] to-black shadow-inner">
                 <span className="absolute inset-0 flex items-center justify-center p-6 text-center font-space text-xs uppercase tracking-[0.12em] text-text-muted">
                   {/* TODO: 2025 robot CAD render */}
                   {"// IMAGE: 2025 robot CAD render"}
@@ -160,7 +164,7 @@ export default function HomePage() {
         className="scroll-mt-28 bg-offwhite py-16 md:py-24 lg:py-32"
       >
         <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-16">
-          <h2 className="font-ui text-[clamp(36px,6vw,48px)] font-bold text-[#0d0d0d]">
+          <h2 className="font-heading text-[clamp(36px,6vw,48px)] font-semibold text-[#0d0d0d]">
             Latest Updates
           </h2>
           <div className="mt-10 flex flex-col gap-8">
@@ -169,7 +173,7 @@ export default function HomePage() {
                 key={post.slug}
                 href={`/blog/${post.slug}`}
                 data-cursor-hover
-                className="group flex flex-col overflow-hidden rounded-2xl border border-[rgba(13,13,13,0.08)] bg-white shadow-sm transition-all hover:border-gold md:flex-row"
+                className="group flex flex-col overflow-hidden rounded-card border border-[rgba(13,13,13,0.08)] bg-white shadow-sm transition-all hover:border-gold md:flex-row"
               >
                 <ImageReveal direction={i % 2 === 0 ? "left" : "right"} delay={i * 0.06} className="md:w-72 md:shrink-0">
                   <div className="relative aspect-video w-full bg-gradient-to-br from-maroon-dark to-black md:h-full md:min-h-[200px]">
@@ -183,7 +187,7 @@ export default function HomePage() {
                   <time className="font-space text-xs text-[#5c534c]" dateTime={post.date}>
                     {post.date}
                   </time>
-                  <h3 className="mt-2 font-ui text-xl text-[#0d0d0d] group-hover:text-maroon">
+                  <h3 className="mt-2 font-heading text-xl font-medium text-[#1a1816] group-hover:text-maroon">
                     {post.title}
                   </h3>
                   <p className="mt-3 line-clamp-3 font-body text-sm text-[#3d3835]">
@@ -208,7 +212,7 @@ export default function HomePage() {
         className="grain-dark scroll-mt-28 border-t border-[var(--color-border)] bg-[#0D0D0D] py-16 md:py-24 lg:py-32"
       >
         <div className="relative z-10 mx-auto max-w-7xl px-4 text-center md:px-8 lg:px-16">
-          <h2 className="font-ui text-[clamp(36px,6vw,48px)] font-bold text-offwhite">
+          <h2 className="font-heading text-[clamp(36px,6vw,48px)] font-semibold text-offwhite">
             Supported By
           </h2>
           <MarqueeRow />

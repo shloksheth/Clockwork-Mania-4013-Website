@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import {
   motion,
   useInView,
@@ -16,24 +16,28 @@ interface RevealOnScrollProps {
   className?: string;
 }
 
-const variantMap: Record<string, Variants> = {
-  up: {
-    hidden: { opacity: 0, y: 48 },
-    visible: { opacity: 1, y: 0 },
-  },
-  left: {
-    hidden: { opacity: 0, x: -48 },
-    visible: { opacity: 1, x: 0 },
-  },
-  right: {
-    hidden: { opacity: 0, x: 48 },
-    visible: { opacity: 1, x: 0 },
-  },
-  none: {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-  },
-};
+function buildVariants(reduce: boolean): Record<string, Variants> {
+  const b = reduce ? "blur(0px)" : "blur(10px)";
+  const z = "blur(0px)";
+  return {
+    up: {
+      hidden: { opacity: 0, y: 44, filter: b },
+      visible: { opacity: 1, y: 0, filter: z },
+    },
+    left: {
+      hidden: { opacity: 0, x: -44, filter: b },
+      visible: { opacity: 1, x: 0, filter: z },
+    },
+    right: {
+      hidden: { opacity: 0, x: 44, filter: b },
+      visible: { opacity: 1, x: 0, filter: z },
+    },
+    none: {
+      hidden: { opacity: 0, filter: b },
+      visible: { opacity: 1, filter: z },
+    },
+  };
+}
 
 export function RevealOnScroll({
   children,
@@ -45,6 +49,7 @@ export function RevealOnScroll({
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-8% 0px" });
   const reduce = useReducedMotion();
+  const variantMap = useMemo(() => buildVariants(!!reduce), [reduce]);
 
   return (
     <motion.div

@@ -2,50 +2,84 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Optional files: place Starships / Great Victorian as WOFF2 under public/fonts/ */
+@font-face {
+  font-family: "Starships";
+  src:
+    local("Starships"),
+    url("/fonts/starships.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Great Victorian";
+  src:
+    local("Great Victorian"),
+    local("Great Victorian Swashed SC"),
+    url("/fonts/great-victorian.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Steamwreck";
+  src:
+    local("Steamwreck"),
+    url("/fonts/steamwreck.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --color-maroon: #7b1c1c;
-  --color-maroon-dark: #4a0e0e;
-  --color-maroon-light: #a52a2a;
-  --color-black: #0d0d0d;
-  --color-surface: #1a1a1a;
-  --color-surface-raised: #222222;
-  --color-gold: #c9973a;
-  --color-gold-light: #e3b96a;
-  --color-offwhite: #f5f0eb;
-  /* Sophisticated body on dark */
-  --color-text-primary: rgba(245, 240, 235, 0.82);
-  --color-text-muted: #a09890;
-  --color-border: rgba(201, 151, 58, 0.2);
+  --color-maroon: #630b0c;
+  --color-maroon-dark: #3f0708;
+  --color-maroon-light: #7a1011;
+  --color-black: #080808;
+  --color-surface: #0f0f0f;
+  --color-surface-raised: #161616;
+  --color-gold: #ffd208;
+  --color-gold-light: #ffe566;
+  --color-gold-muted: rgba(255, 210, 8, 0.55);
+  --color-offwhite: #f7f5f0;
+  --color-text-primary: rgba(247, 245, 240, 0.88);
+  --color-text-muted: rgba(247, 245, 240, 0.48);
+  --color-border: rgba(99, 11, 12, 0.22);
 
   --noise-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg");
 }
 
-/* Display headings — hero titles */
+/* Display / hero titles — Starships → Great Victorian → Cinzel (web) */
 .font-display {
-  font-family: var(--font-bebas), sans-serif;
-  letter-spacing: 0.03em;
-  line-height: 0.92;
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  padding-bottom: 0.06em;
 }
 
-/* Editorial headings — section titles, pull quotes */
+/* Pull quotes — Baskerville italic */
 .font-editorial {
-  font-family: var(--font-playfair), serif;
+  font-family: var(--font-baskerville), "Libre Baskerville", "Baskerville", Georgia, serif;
+  font-style: italic;
   letter-spacing: -0.01em;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
-/* UI headings — nav, cards, labels */
+/* Nav, labels, UI chrome — neutral system stack */
 .font-ui {
-  font-family: var(--font-space), sans-serif;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
 }
 
-/* Body copy — Cormorant Garamond */
+/* Body — Baskerville */
 .font-body {
-  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-family: var(--font-baskerville), "Libre Baskerville", "Baskerville", Georgia, serif;
   font-weight: 400;
-  line-height: 1.75;
+  line-height: 1.7;
   letter-spacing: 0.01em;
 }
 
@@ -55,11 +89,13 @@
   }
 
   body {
-    @apply bg-[#0D0D0D] font-body text-text-primary antialiased;
+    @apply bg-[#080808] font-body text-text-primary antialiased;
+    cursor: none;
+    --font-heading: "Starships", "Great Victorian", var(--font-cinzel), Georgia, serif;
   }
 
   ::selection {
-    background: rgba(201, 151, 58, 0.35);
+    background: rgba(255, 210, 8, 0.22);
     color: var(--color-offwhite);
   }
 
@@ -84,28 +120,20 @@
   }
 }
 
-/* Section label with gold rules */
 .section-label-line {
-  @apply h-px w-5 shrink-0 bg-gold opacity-60;
+  @apply h-px w-5 shrink-0 bg-gold opacity-50;
 }
 
-/* Stat number gradient */
+/* Flat stat numerals — no decorative gradients */
 .stat-number-gradient {
-  font-family: var(--font-bebas), sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(64px, 8vw, 96px);
-  line-height: 1;
-  color: transparent;
-  background: linear-gradient(
-    135deg,
-    var(--color-maroon-light) 0%,
-    var(--color-gold) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  line-height: 1.08;
+  color: var(--color-gold);
+  letter-spacing: 0.02em;
+  padding-bottom: 0.04em;
 }
 
-/* Grain overlay for dark sections */
 .grain-dark {
   position: relative;
   isolation: isolate;
@@ -117,13 +145,12 @@
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.025;
+  opacity: 0.022;
   background-image: var(--noise-svg);
   background-repeat: repeat;
   background-size: 280px 280px;
 }
 
-/* Gear rotation — still used where CSS preferred */
 @keyframes spin-cw {
   from {
     transform: rotate(0deg);
@@ -165,7 +192,6 @@
   animation: scroll-line-sweep 1.5s ease-in-out infinite;
 }
 
-/* Hotspot pulse */
 @keyframes hotspot-pulse {
   0%,
   100% {
@@ -210,14 +236,14 @@
 .tier-diamond-ring {
   background: linear-gradient(
     120deg,
-    rgba(201, 151, 58, 0.15),
-    rgba(201, 151, 58, 0.85),
-    rgba(123, 28, 28, 0.6),
-    rgba(201, 151, 58, 0.85),
-    rgba(201, 151, 58, 0.15)
+    rgba(255, 210, 8, 0.12),
+    rgba(255, 210, 8, 0.45),
+    rgba(99, 11, 12, 0.5),
+    rgba(255, 210, 8, 0.45),
+    rgba(255, 210, 8, 0.12)
   );
   background-size: 300% 300%;
   animation: border-shimmer 3s ease infinite;
   padding: 1px;
-  border-radius: 16px;
+  border-radius: 4px;
 }

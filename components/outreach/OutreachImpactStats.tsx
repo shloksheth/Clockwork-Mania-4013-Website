@@ -43,7 +43,7 @@ export function OutreachImpactStats() {
       {items.map((s) => (
         <SpotlightCard
           key={s.label}
-          className="rounded-[12px]"
+          className="rounded-card"
           spotlightColor="rgba(201, 151, 58, 0.08)"
           lift={4}
         >

@@ -57,7 +57,7 @@ export function HistoryTimeline() {
       className="grain-dark scroll-mt-28 bg-[#0D0D0D] py-20 lg:py-28"
     >
       <div className="relative z-10 mx-auto max-w-5xl px-5 lg:px-8">
-        <h2 className="font-space text-4xl font-bold text-offwhite">Our Journey</h2>
+        <h2 className="font-heading text-4xl font-semibold text-offwhite">Our Journey</h2>
         <div className="relative mt-16">
           <div
             className="absolute left-[50%] top-0 hidden h-full w-px -translate-x-1/2 bg-maroon md:block"
@@ -76,7 +76,7 @@ export function HistoryTimeline() {
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: i * 0.06, duration: 0.55, ease: "easeOut" }}
                 >
-                  <div className="rounded-2xl border border-[rgba(201,151,58,0.15)] bg-surface p-6">
+                  <div className="rounded-card border border-[rgba(255,210,8,0.15)] bg-surface p-6">
                     <p className="font-bebas text-5xl text-gold">{e.year}</p>
                     <h3 className="mt-2 font-space text-xl font-semibold text-offwhite">
                       {e.title}

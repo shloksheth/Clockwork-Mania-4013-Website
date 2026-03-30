@@ -50,7 +50,7 @@ export default function RobotPage() {
             </p>
           </RevealOnScroll>
           <RevealOnScroll delay={0.08}>
-            <div className="rounded-2xl border border-[rgba(13,13,13,0.08)] bg-white p-8 shadow-sm">
+            <div className="rounded-card border border-[rgba(13,13,13,0.08)] bg-white p-8 shadow-sm">
               <h3 className="font-space text-xs font-semibold uppercase tracking-[0.14em] text-maroon">
                 Key facts
               </h3>
@@ -80,7 +80,7 @@ export default function RobotPage() {
         className="grain-dark scroll-mt-28 bg-[#0D0D0D] py-20 lg:py-28"
       >
         <div className="relative z-10 mx-auto max-w-7xl px-5 lg:px-8">
-          <h2 className="font-space text-4xl font-bold text-offwhite">Anatomy of the Machine</h2>
+          <h2 className="font-heading text-4xl font-semibold text-offwhite">Anatomy of the Machine</h2>
           <p className="mt-4 max-w-2xl font-inter text-text-muted">
             Tap a pulsing node to read engineering notes — positions are placeholders until final
             CAD overlays are locked.
@@ -93,7 +93,7 @@ export default function RobotPage() {
 
       <section id="gallery" className="scroll-mt-28 bg-offwhite py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <h2 className="font-space text-4xl font-bold text-[#0d0d0d]">
+          <h2 className="font-heading text-4xl font-semibold text-[#1a1816]">
             In the Shop &amp; On the Field
           </h2>
           <div className="mt-12">
@@ -104,8 +104,8 @@ export default function RobotPage() {
 
       <section id="specs" className="grain-dark scroll-mt-28 bg-[#0D0D0D] py-20 lg:py-28">
         <div className="relative z-10 mx-auto max-w-4xl px-5 lg:px-8">
-          <h2 className="font-space text-4xl font-bold text-offwhite">Specifications</h2>
-          <div className="mt-10 overflow-hidden rounded-2xl border border-[rgba(201,151,58,0.15)]">
+          <h2 className="font-heading text-4xl font-semibold text-offwhite">Specifications</h2>
+          <div className="mt-10 overflow-hidden rounded-card border border-border">
             <table className="w-full border-collapse font-space text-sm">
               <thead>
                 <tr className="bg-[rgba(255,255,255,0.04)] text-left text-gold">

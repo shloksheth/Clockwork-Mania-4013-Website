@@ -6,7 +6,7 @@ type Props = {
 
 export function TeamFoundedCard({ title, subtitle, description }: Props) {
   return (
-    <div className="rounded-xl border border-[rgba(13,13,13,0.08)] bg-white p-6 shadow-sm">
+    <div className="rounded-card border border-[rgba(13,13,13,0.08)] bg-white p-6 shadow-sm">
       <p className="font-space text-xs font-semibold uppercase tracking-[0.1em] text-maroon">
         {subtitle}
       </p>

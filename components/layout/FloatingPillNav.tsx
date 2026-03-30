@@ -112,7 +112,7 @@ export function FloatingPillNav() {
       aria-hidden={!visible}
     >
       <nav
-        className="scrollbar-hide flex max-w-[90vw] gap-1 overflow-x-auto rounded-full border border-[rgba(201,151,58,0.25)] bg-[rgba(26,26,26,0.9)] px-3 py-1.5 backdrop-blur-[20px]"
+        className="scrollbar-hide flex max-w-[90vw] gap-1 overflow-x-auto rounded-full border border-border bg-[rgba(15,15,15,0.92)] px-3 py-1.5 backdrop-blur-[20px]"
         aria-label="Section navigation"
       >
         {items.map((item) => {
@@ -125,7 +125,7 @@ export function FloatingPillNav() {
               className={`whitespace-nowrap rounded-full px-2.5 py-1.5 font-space text-[12px] font-semibold uppercase tracking-[0.06em] transition-colors duration-200 ${
                 isActive
                   ? "bg-maroon text-gold"
-                  : "text-text-muted hover:bg-[rgba(123,28,28,0.25)] hover:text-offwhite"
+                  : "text-text-muted hover:bg-[rgba(99,11,12,0.25)] hover:text-offwhite"
               }`}
             >
               {item.label}

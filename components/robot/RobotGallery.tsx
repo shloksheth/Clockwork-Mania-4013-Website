@@ -20,7 +20,7 @@ export function RobotGallery() {
           className="mb-4 break-inside-avoid w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
         >
           {/* TODO: Add actual robot photos */}
-          <div className="aspect-[4/5] overflow-hidden rounded-xl bg-gradient-to-br from-maroon-dark to-black transition-transform duration-300 hover:scale-[1.02]">
+          <div className="aspect-[4/5] overflow-hidden rounded-card bg-gradient-to-br from-maroon-dark to-black transition-transform duration-300 hover:scale-[1.02]">
             <span className="flex h-full items-center justify-center p-4 text-center font-space text-[10px] uppercase tracking-[0.12em] text-text-muted">
               {/* TODO: Robot photo */}
               {`// IMAGE: Robot photo ${i + 1}`}
@@ -45,7 +45,7 @@ export function RobotGallery() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ type: "spring", stiffness: 260, damping: 24 }}
-              className="relative max-h-[90vh] max-w-5xl overflow-hidden rounded-2xl border border-[var(--color-border)] bg-surface shadow-2xl"
+              className="relative max-h-[90vh] max-w-5xl overflow-hidden rounded-card border border-[var(--color-border)] bg-surface shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <button

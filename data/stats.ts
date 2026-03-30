@@ -7,7 +7,7 @@ export type StatItem = {
 
 export const homeStats: StatItem[] = [
   {
-    value: 10,
+    value: 5,
     label: "World Championship Appearances",
   },
   {

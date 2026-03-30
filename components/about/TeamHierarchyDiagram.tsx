@@ -3,11 +3,11 @@
 import { motion } from "framer-motion";
 
 const node =
-  "rounded-xl border border-[rgba(201,151,58,0.25)] bg-[#1a1a1a] px-4 py-3 text-center font-space text-sm font-semibold uppercase tracking-[0.08em] text-offwhite";
+  "rounded-card border border-[rgba(255,210,8,0.25)] bg-[#1a1a1a] px-4 py-3 text-center font-space text-sm font-semibold uppercase tracking-[0.08em] text-offwhite";
 
 export function TeamHierarchyDiagram() {
   return (
-    <div className="mx-auto max-w-4xl rounded-2xl border border-[rgba(13,13,13,0.08)] bg-white p-10 shadow-sm">
+    <div className="mx-auto max-w-4xl rounded-card border border-[rgba(13,13,13,0.08)] bg-white p-10 shadow-sm">
       <div className="flex flex-col items-center gap-6">
         <motion.div
           className={node}
