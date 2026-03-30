@@ -139,7 +139,7 @@ function HeroPocketWatch() {
           <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">
             <feDropShadow dx="0" dy="10" stdDeviation="10" floodColor="rgba(0,0,0,0.5)" />
           </filter>
-          <path id="mottoPath" d={`M ${CX}, ${CY - 190} A 190,190 0 1,1 ${CX}, ${CY + 190} A 190,190 0 1,1 ${CX}, ${CY - 190}`} />
+          <path id="mottoPath" d={`M ${CX - 190}, ${CY} A 190,190 0 0,1 ${CX + 190}, ${CY}`} />
         </defs>
 
 
@@ -276,10 +276,21 @@ function HeroPocketWatch() {
             <circle cx={CX} cy={CY} r={9} fill="var(--color-maroon-light)" fillOpacity={0.85} stroke="var(--color-gold)" strokeOpacity={0.4} strokeWidth={2.2} />
           </>
         )}
+        {/* Hinge */}
+        <rect
+          x={CX - 253 - 5} // Adjust x to be slightly to the left of the pivot
+          y={CY - 15} // Adjust y to be centered vertically on the pivot
+          width={10} // Width of the hinge
+          height={30} // Height of the hinge
+          fill="var(--color-gold)"
+          fillOpacity={0.7}
+          rx={2} // Rounded corners
+        />
+
           {/* Lid (case) - rendered last so it covers everything when closed */}
           <motion.g
             style={{ transformOrigin: `${CX - 253}px ${CY}px` }} // Pivot point (left edge of the watch)
-          animate={{ rotateY: isClicked ? -180 : 0, rotateZ: isClicked ? -10 : 0, translateY: isClicked ? -100 : 0 }}
+          animate={{ rotateY: isClicked ? -180 : 0, rotateZ: isClicked ? -10 : 0, translateX: isClicked ? -450 : 0 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
           >
           <path
