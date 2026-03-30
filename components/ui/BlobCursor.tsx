@@ -67,7 +67,7 @@ export function BlobCursor({ navHeight }: { navHeight: number }) {
       }}
     >
       <Canvas
-        dpr={window.devicePixelRatio}
+        dpr={[1, 1.5]} // Cap DPR to reduce VRAM usage on high-DPI screens
         linear
         flat
         camera={{ position: [0, 0, 1] }}
@@ -83,19 +83,19 @@ export function BlobCursor({ navHeight }: { navHeight: number }) {
               fluidColor="#FFD700" // Reverted to original less metallic gold fluid color
               backgroundColor="transparent"
               showBackground={false}
-              blend={1.0}
-              intensity={15}
-              force={6}
-              distortion={6.0}
-              radius={currentRadius}
-              curl={5}
-              swirl={5}
-              velocityDissipation={0.95}
-              densityDissipation={0.95}
-              pressure={0.8}
+              blend={0.8} // Slightly reduced blend
+              intensity={12} // Reduced intensity
+              force={5} // Reduced force
+              distortion={5.0} // Reduced distortion
+              radius={currentRadius * 0.8} // Reduce radius further
+              curl={7} // Slightly increased curl for less liquidy feel initially, might adjust later
+              swirl={7} // Slightly increased swirl
+              velocityDissipation={0.98} // Increased dissipation for shorter trails
+              densityDissipation={0.98} // Increased dissipation for shorter trails
+              pressure={0.7} // Slightly reduced pressure
               rainbow={false}
             />
-            <Noise opacity={0.15} />
+            {/* <Noise opacity={0.15} /> */}
           </EffectComposer>
         </Suspense>
       </Canvas>

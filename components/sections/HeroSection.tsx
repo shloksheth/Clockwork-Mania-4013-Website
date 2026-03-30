@@ -1,32 +1,68 @@
 "use client";
 
-import { motion, useAnimate, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useAnimate, useReducedMotion, useMotionValue } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { GearBackground } from "@/components/sections/GearBackground";
 import { AmbientField } from "@/components/ui/AmbientField";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { usePocketWatchInteraction } from "@/components/context/PocketWatchContext";
 
-const CX = 100;
-const CY = 132;
+
+const CX = 421;
+    const CY = 421;
 
 function HeroPocketWatch() {
   const [scope, animate] = useAnimate();
   const reduce = useReducedMotion();
   const [time, setTime] = useState(() => new Date());
   const [mounted, setMounted] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
   const { isHoveringPocketWatch, setIsHoveringPocketWatch } = usePocketWatchInteraction();
+  const watchRef = useRef<HTMLDivElement>(null);
+
+  // Framer Motion values for tilt effect
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!watchRef.current) return;
+
+    const { clientX, clientY } = e;
+    const { left, top, width, height } = watchRef.current.getBoundingClientRect();
+
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
+
+    const offsetX = (clientX - centerX) / width; // -0.5 to 0.5
+    const offsetY = (clientY - centerY) / height; // -0.5 to 0.5
+
+    // Apply a tilt effect (adjust multiplier for intensity)
+    rotateY.set(offsetX * 60); // Rotate around Y-axis based on X position
+    rotateX.set(offsetY * -60); // Rotate around X-axis based on Y position (inverted)
+  };
+
+  const handleMouseLeave = () => {
+    setIsHoveringPocketWatch(false);
+  };
+
+  const handleToggleClick = () => {
+    setIsClicked(!isClicked);
+  };
 
   useEffect(() => {
     setMounted(true);
-    if (reduce || !isHoveringPocketWatch) {
+    if (scope.current) {
+      watchRef.current = scope.current as HTMLDivElement;
+    }
+    const isOpen = isClicked;
+    if (reduce || !isOpen) {
       setTime(new Date());
       return;
     }
     const id = window.setInterval(() => setTime(new Date()), 1000);
     return () => window.clearInterval(id);
-  }, [reduce, isHoveringPocketWatch]);
+  }, [reduce, isClicked, scope]);
 
   useEffect(() => {
     if (reduce) {
@@ -37,7 +73,7 @@ function HeroPocketWatch() {
     void (async () => {
       await animate(
         scope.current,
-        { opacity: [0, 1], scale: [0.82, 1], rotate: [-6, 0] },
+        { scale: [0.82, 1], rotate: [-6, 0] },
         { duration: 1.35, delay: 0.35, ease: [0.22, 1, 0.36, 1] },
       );
       if (cancelled || !scope.current) return;
@@ -57,13 +93,13 @@ function HeroPocketWatch() {
   const ticks = Array.from({ length: 12 }, (_, i) => {
     const deg = i * 30 - 90;
     const rad = (deg * Math.PI) / 180;
-    const rO = 73;
-    const rI = i % 3 === 0 ? 58 : 64;
+    const rO = 175;
+    const rI = i % 3 === 0 ? 140 : 155;
     const x1 = CX + rO * Math.cos(rad);
     const y1 = CY + rO * Math.sin(rad);
     const x2 = CX + rI * Math.cos(rad);
     const y2 = CY + rI * Math.sin(rad);
-    const sw = i % 3 === 0 ? 1.4 : 0.9;
+    const sw = i % 3 === 0 ? 2.3 : 1.5;
     return (
       <line
         key={i}
@@ -81,102 +117,121 @@ function HeroPocketWatch() {
   return (
     <motion.div
       ref={scope}
-      className="relative mx-auto w-full max-w-[min(100%,520px)] md:max-w-none"
-      style={{ opacity: reduce ? 1 : 0 }}
+      initial={reduce ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       aria-hidden
       onMouseEnter={() => setIsHoveringPocketWatch(true)}
-      onMouseLeave={() => setIsHoveringPocketWatch(false)}
+      onMouseLeave={handleMouseLeave}
+      onMouseMove={handleMouseMove}
+      onClick={handleToggleClick}
     >
       <svg
-        viewBox="0 0 200 250"
-        className="h-auto w-full min-w-[280px] md:min-h-[420px] md:min-w-[420px]"
+          className="relative z-[99] block h-[842px] w-[842px] touch-none select-none overflow-visible will-change-transform"
+          viewBox="0 0 842 842"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
           <linearGradient id="heroWatchCase" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="var(--color-gold)" stopOpacity="0.35" />
-            <stop offset="100%" stopColor="var(--color-maroon)" stopOpacity="0.25" />
+            <stop offset="0%" stopColor="var(--color-gold)" stopOpacity="0.7" />
+            <stop offset="100%" stopColor="#600000" stopOpacity="0.5" />
           </linearGradient>
+          <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="10" stdDeviation="10" floodColor="rgba(0,0,0,0.5)" />
+          </filter>
+          <path id="mottoPath" d={`M ${CX}, ${CY - 190} A 190,190 0 1,1 ${CX}, ${CY + 190} A 190,190 0 1,1 ${CX}, ${CY - 190}`} />
         </defs>
 
-        {/* Bow + stem */}
-        <path
-          d="M 100 14 C 78 14 78 38 88 46 L 88 56 C 88 62 94 66 100 66 C 106 66 112 62 112 56 L 112 46 C 122 38 122 14 100 14 Z"
-          fill="none"
-          stroke="var(--color-gold)"
-          strokeOpacity={0.28}
-          strokeWidth={1.2}
-        />
-        <circle
-          cx={CX}
-          cy={28}
-          r={5}
-          fill="none"
-          stroke="var(--color-gold)"
-          strokeOpacity={0.35}
-          strokeWidth={1}
-        />
-        <line
-          x1={CX}
-          y1={33}
-          x2={CX}
-          y2={52}
-          stroke="var(--color-gold)"
-          strokeOpacity={0.3}
-          strokeWidth={1.2}
-        />
 
-        {/* Outer case */}
+
+        {/* Bow + stem */}
+        <g transform={`translate(${253}, ${77})`}>
+          <path
+              d="M 168 23 C 131 23 131 63 148 77 L 148 94 C 148 105 158 111 168 111 C 178 111 189 105 189 94 L 189 77 C 206 63 206 23 168 23 Z"
+              fill="var(--color-gold)"
+              fillOpacity={0.5}
+              strokeWidth={8}
+            />
+          <circle
+            cx={168}
+            cy={47}
+            r={8}
+            fill="none"
+            strokeWidth={5}
+          />
+          <line
+            x1={168}
+            y1={55}
+            x2={168}
+            y2={88}
+            stroke="var(--color-gold)"
+            strokeOpacity={0.3}
+            strokeWidth={2.1}
+          />
+        </g>
         <circle
           cx={CX}
           cy={CY}
-          r={93}
+          r={253}
           fill="var(--color-maroon)"
-          fillOpacity={0.1}
-          stroke="url(#heroWatchCase)"
-          strokeOpacity={0.55}
-          strokeWidth={1.4}
+            fillOpacity={0.1}
+            strokeWidth={8}
         />
         <circle
           cx={CX}
           cy={CY}
-          r={86}
+          r={145}
           fill="none"
-          stroke="var(--color-gold)"
-          strokeOpacity={0.12}
-          strokeWidth={1}
+            strokeWidth={5}
         />
 
         {/* Dial */}
-        <circle cx={CX} cy={CY} r={78} fill="#0a0a0a" fillOpacity={0.88} stroke="var(--color-maroon-light)" strokeOpacity={0.35} strokeWidth={0.8} />
+        <circle cx={CX} cy={CY} r={180} fill="#0a0a0a" fillOpacity={0.88} stroke="var(--color-maroon-light)" strokeOpacity={0.35} strokeWidth={1.4} />
 
         {ticks}
 
-        <text
-          x={CX}
-          y={CY + 52}
-          textAnchor="middle"
-          fill="var(--color-gold)"
-          fillOpacity={0.35}
-          fontSize="11"
-          letterSpacing="0.2em"
-          style={{ fontFamily: "var(--font-heading)" }}
+        <g
+          transform={`translate(${CX}, ${CY})`}
+          transform-origin={`${CX} ${CY}`}
+          className="group"
         >
-          4013
-        </text>
+          <text
+            x="0"
+            y="0"
+            textAnchor="middle"
+            fill="var(--color-gold)"
+            fontSize="20"
+            fontWeight="bold"
+          >
+            4013
+          </text>
+        </g>
+
+        {/* Motto (visible only when clicked, does not rotate) */}
+        {isClicked && (
+          <motion.text
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.3 }}
+            fill="#D4AF37" // Metallic gold color
+            fontSize="14"
+          >
+            <textPath href="#mottoPath" startOffset="50%" textAnchor="middle">
+              Even the smallest gear makes the clock work
+            </textPath>
+          </motion.text>
+        )}
 
         {/* Crown */}
         <rect
-          x={180}
-          y={CY - 5}
-          width={10}
-          height={14}
-          rx={2}
+          x={CX + 245}
+          y={CY - 12}
+          width={16}
+          height={23}
+          rx={3.6}
           fill="var(--color-maroon)"
           fillOpacity={0.2}
-          stroke="var(--color-gold)"
-          strokeOpacity={0.35}
-          strokeWidth={0.8}
+          strokeWidth={1.2}
         />
 
         {/* Hands — mechanical tick (second jumps each second) */}
@@ -187,10 +242,10 @@ function HeroPocketWatch() {
                 x1={CX}
                 y1={CY}
                 x2={CX}
-                y2={CY - 34}
+                y2={CY - 70}
                 stroke="var(--color-gold)"
                 strokeOpacity={0.75}
-                strokeWidth={3.2}
+                strokeWidth={8.5}
                 strokeLinecap="round"
               />
             </g>
@@ -199,29 +254,43 @@ function HeroPocketWatch() {
                 x1={CX}
                 y1={CY}
                 x2={CX}
-                y2={CY - 52}
+                y2={CY - 106}
                 stroke="var(--color-offwhite)"
                 strokeOpacity={0.55}
-                strokeWidth={2}
+                strokeWidth={5.6}
                 strokeLinecap="round"
               />
             </g>
             <g transform={`rotate(${secondDeg} ${CX} ${CY})`}>
               <line
                 x1={CX}
-                y1={CY + 8}
+                y1={CY + 15}
                 x2={CX}
-                y2={CY - 58}
+                y2={CY - 117}
                 stroke="var(--color-gold-light)"
                 strokeOpacity={0.85}
-                strokeWidth={1}
+                strokeWidth={3.3}
                 strokeLinecap="round"
               />
             </g>
-            <circle cx={CX} cy={CY} r={4} fill="var(--color-maroon-light)" fillOpacity={0.85} stroke="var(--color-gold)" strokeOpacity={0.4} strokeWidth={0.8} />
+            <circle cx={CX} cy={CY} r={9} fill="var(--color-maroon-light)" fillOpacity={0.85} stroke="var(--color-gold)" strokeOpacity={0.4} strokeWidth={2.2} />
           </>
         )}
-      </svg>
+          {/* Lid (case) - rendered last so it covers everything when closed */}
+          <motion.g
+            style={{ transformOrigin: `${CX - 253}px ${CY}px` }} // Pivot point (left edge of the watch)
+          animate={{ rotateY: isClicked ? -180 : 0, rotateZ: isClicked ? -10 : 0, translateY: isClicked ? -100 : 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+          >
+          <path
+            d={`M ${CX} ${CY - 253} A 253 253 0 1 1 ${CX} ${CY + 253} A 253 253 0 1 1 ${CX} ${CY - 253} Z`} // Main circle for the watch body
+            fill="var(--color-maroon)"
+            strokeWidth={10}
+            filter="url(#dropShadow)"
+          />
+
+          </motion.g>
+        </svg>
     </motion.div>
   );
 }
@@ -246,8 +315,8 @@ export function HeroSection() {
         aria-hidden
       />
 
-      <div className="relative z-[4] mx-auto flex min-h-[100svh] max-w-[1600px] flex-col items-center justify-center gap-10 px-4 py-20 md:px-8 lg:px-16 lg:pb-32 lg:pt-0">
-          <div className="flex max-w-3xl flex-col items-center justify-center py-24 text-center">
+      <div className="relative z-[4] mx-auto flex min-h-[100svh] max-w-[1600px] flex-col items-center justify-start gap-10 px-4 py-20 md:px-8 lg:px-16 lg:pb-32 lg:pt-20">
+          <div className="flex max-w-3xl flex-col items-center justify-center text-center">
           <motion.div
             initial={reduce ? false : { opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -261,7 +330,7 @@ export function HeroSection() {
             <span className="section-label-line" aria-hidden />
           </motion.div>
 
-          <div className="mt-5 font-display text-[clamp(56px,13vw,160px)] font-black leading-[1.12] text-offwhite tracking-[0.3em]"
+          <div className="mt-5 font-display text-[clamp(106px,13vw,210px)] font-black leading-[1.12] text-offwhite tracking-[0.1em]"
             style={{
               textShadow: "0 0 10px rgba(245,240,235,0.4), 0 2px 48px rgba(99,11,12,0.25)",
             }}
@@ -281,7 +350,7 @@ export function HeroSection() {
                   Clockwork
                 </motion.span>
               </div>
-              <div className="absolute -bottom-2 right-0 text-[clamp(38px,7vw,80px)] font-['Steamwreck'] uppercase">
+              <motion.div className="absolute bottom-[0%] right-[0%] z-10 w-fit font-['Steamwreck'] text-[clamp(90px,11vw,140px)] font-black uppercase leading-[0.8] text-offwhite/100 tracking-[0.1em] lg:bottom-[0%] lg:right-[0%] lg:text-[clamp(90px,11vw,140px)]">
                 <div className="relative -my-[0.14em] overflow-hidden py-[0.14em]">
                   <motion.span
                     className="block"
@@ -322,15 +391,10 @@ export function HeroSection() {
                     </span>
                   </motion.span>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
-
-
-
-
-        </div>
-            <div className="flex items-center justify-center pt-10 md:pt-0">
+          <div className="absolute inset-x-0 top-1/2 z-10 flex -translate-y-[300px] items-center justify-center">
           <HeroPocketWatch />
         </div>
       </div>
@@ -345,6 +409,7 @@ export function HeroSection() {
         <div className="relative h-10 w-px overflow-hidden bg-gold/25">
           <div className="animate-scroll-line absolute inset-x-0 top-0 h-full w-full bg-gold" />
         </div>
+      </div>
       </div>
     </section>
   );

@@ -90,7 +90,7 @@
 
   body {
     @apply bg-[#080808] font-body text-text-primary antialiased;
-    cursor: none;
+
     --font-heading: "Starships", "Great Victorian", var(--font-cinzel), Georgia, serif;
   }
 
